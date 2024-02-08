@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+DS_Store
+node_modules
+server/utils/default-cards-20240207220534.json
