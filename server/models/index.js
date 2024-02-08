@@ -1,3 +1,3 @@
 const Card = require('./Card');
-
-module.exports = { Card };
+const Collection = require ('./Collection')
+module.exports = { Card, Collection };
