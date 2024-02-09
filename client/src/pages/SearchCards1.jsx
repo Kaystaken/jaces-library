@@ -2,7 +2,7 @@ import { Button, Stack, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 
-import { QUERY_CARDS } from '../../utils/queries';
+import { QUERY_CARDS } from '../utils/queries';
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
 function SearchCards() {

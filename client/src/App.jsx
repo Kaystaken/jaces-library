@@ -18,7 +18,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 //import Navbar from './components/Navbar';
-import Auth from '../utils/auth';
+import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
