@@ -1,4 +1,3 @@
-import './App.css';
 import { Outlet } from 'react-router-dom';
 
 import {
@@ -9,8 +8,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import Navbar from './components/Navbar';
-import Auth from './utils/auth';
+//import Navbar from './components/Navbar';
+import Auth from '../utils/auth';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -42,7 +41,6 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Navbar />
         <Outlet />
       </ApolloProvider>
     </>

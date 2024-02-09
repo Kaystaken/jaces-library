@@ -18,15 +18,15 @@ const resolvers = {
     set_list: async () => {
       return Card.distinct('set');
     },
-    me: async (parent, args, context) => {
+    /*me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
       throw AuthenticationError;
-    },
+    },*/
   },
   Mutation: {
-    login: async (parent, { email, password }) => {
+    /*login: async (parent, { email, password }) => {
       console.log('is this a thing')
       const user = await User.findOne({ email });
 
@@ -48,7 +48,7 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },
+    },*/
     addCardToCollection: async (parent, { username, cardId }) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
