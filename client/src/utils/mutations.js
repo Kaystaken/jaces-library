@@ -26,7 +26,7 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TO_DECK =gql`
-  mmutation AddToDeck(, $cardName: String!, $cardImage: String!) {
+  mutation AddToDeck(, $cardName: String!, $cardImage: String!) {
     addCardToDeck(cardName: $cardName, cardImage: $cardImage) {
       _id
       name

@@ -10,7 +10,7 @@ import Tab from '@mui/material/Tab';
 import Modal from '@mui/material/Modal';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-import Auth from '../../utils/auth';
+import Auth from '../utils/auth';
 
 const style = {
   position: 'absolute',
