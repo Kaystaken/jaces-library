@@ -1,17 +1,18 @@
-import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../../utils/auth';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const SignupForm = () => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [addUser, { error, data }] = useMutation(ADD_USER)
+  const [addUser, { error }] = useMutation(ADD_USER);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -20,20 +21,14 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
     try {
       const { data } = await addUser({
         variables: { ...userFormData }
-      })
-      const { user, token } = await data.addUser;
-      console.log(user);
-      Auth.login(token);
+      });
+      if (data) {
+        const { token } = data.addUser;
+        Auth.login(token);
+      }
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -47,60 +42,59 @@ const SignupForm = () => {
   };
 
   return (
-    <>
-      {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+    <Box component="form" noValidate autoComplete="off" onSubmit={handleFormSubmit}>
+      {showAlert && (
+        <Alert severity="error" onClose={() => setShowAlert(false)}>
           Something went wrong with your signup!
         </Alert>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your username'
-            name='username'
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Your email address'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
+      )}
+      <Stack spacing={2}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
+          name="username"
+          autoComplete="username"
+          autoFocus
+          value={userFormData.username}
+          onChange={handleInputChange}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          value={userFormData.email}
+          onChange={handleInputChange}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={userFormData.password}
+          onChange={handleInputChange}
+        />
         <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
+        >
           Submit
         </Button>
-      </Form>
-    </>
+      </Stack>
+    </Box>
   );
 };
 

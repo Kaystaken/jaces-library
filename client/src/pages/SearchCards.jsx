@@ -16,7 +16,7 @@ function SearchCards() {
       </Stack>
       {
         (!loading && data) && 
-        <SingleCardDisplay {...getCardDisplayData(data.cards[10000])} />
+        <SingleCardDisplay {...getCardDisplayData(data.cards[9])}  />
       }
     </Stack>
   );

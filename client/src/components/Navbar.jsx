@@ -1,80 +1,73 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Modal from '@mui/material/Modal';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-
 import Auth from '../../utils/auth';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
+
 const AppNavbar = () => {
-  // set modal display state
   const [showModal, setShowModal] = useState(false);
+  const [value, setValue] = useState('login');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
-        <Container fluid>
-          <Navbar.Brand as={Link} to='/'>
-            Jace's Library
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
-            <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/'>
-                Search For Cards
-              </Nav.Link>
-              <Nav.Link as={Link} to='/sets'>
-                View All Sets
-              </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
-              {Auth.loggedIn() ? (
-                <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Card Collection
-                  </Nav.Link>
-                  <Nav.Link as={Link} to='/deck'>
-                    View Deck
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                </>
-              ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      {/* set modal data up */}
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Button color="inherit" component={RouterLink} to="/">
+              Jace's Library
+            </Button>
+          </Typography>
+          <Button color="inherit" component={RouterLink} to="/">Search For Cards</Button>
+          <Button color="inherit" component={RouterLink} to="/sets">View All Sets</Button>
+          {Auth.loggedIn() ? (
+            <>
+              <Button color="inherit" component={RouterLink} to="/saved">See Your Card Collection</Button>
+              <Button color="inherit" component={RouterLink} to="/deck">View Deck</Button>
+              <Button color="inherit" onClick={Auth.logout}>Logout</Button>
+            </>
+          ) : (
+            <Button color="inherit" onClick={() => setShowModal(true)}>Login/Sign Up</Button>
+          )}
+        </Toolbar>
+      </AppBar>
+
       <Modal
-        size='lg'
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'>
-        {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
-          <Modal.Header closeButton>
-            <Modal.Title id='signup-modal'>
-              <Nav variant='pills'>
-                <Nav.Item>
-                  <Nav.Link eventKey='login'>Login</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Tab.Content>
-              <Tab.Pane eventKey='login'>
-                <LoginForm handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-              <Tab.Pane eventKey='signup'>
-                <SignUpForm handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-            </Tab.Content>
-          </Modal.Body>
-        </Tab.Container>
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Tabs value={value} onChange={handleChange} aria-label="login signup tabs">
+            <Tab value="login" label="Login" />
+            <Tab value="signup" label="Sign Up" />
+          </Tabs>
+          {value === 'login' && <LoginForm handleModalClose={() => setShowModal(false)} />}
+          {value === 'signup' && <SignUpForm handleModalClose={() => setShowModal(false)} />}
+        </Box>
       </Modal>
     </>
   );
