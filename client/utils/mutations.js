@@ -25,32 +25,6 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_CARD = gql`
-  mutation saveCard($CardToSave: CardToSave!) {
-    saveBook(CardToSave: $CardtoSave) {
-      _id
-      username
-      email
-      savedCards {
-        cardId
-        image
-        description
-        cardName
-        link
-      }
-    }
-  }
-`;
-
-
-export const REMOVE_CARD = gql`
-  mutation removeCard($CardToSave: ID!) {
-    removeBook(cardID: $cardID) {
-      _id
-    }
-  }
-`;
-
 export const ADD_TO_DECK =gql`
   mmutation AddToDeck(, $cardName: String!, $cardImage: String!) {
     addCardToDeck(cardName: $cardName, cardImage: $cardImage) {

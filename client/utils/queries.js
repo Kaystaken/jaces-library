@@ -15,7 +15,7 @@ export const QUERY_CARDS = gql`
 `;
 
 export const GET_SAVED_CARDS = gql`
-  saved cards{
+  query collection {
     cards {
       id
       name
@@ -30,7 +30,7 @@ export const GET_SAVED_CARDS = gql`
 `;
 
 export const DECK_QUERY = gql`
-  query Deck {
+  query deck {
     deck {
       _id
       name
