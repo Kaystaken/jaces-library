@@ -1,10 +1,8 @@
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-
-import App from './App.jsx'
-import { SearchCards } from './pages/SearchCards.jsx'
-import { SingleCardDisplay } from './components/SingleCardDisplay.jsx'
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import  App  from './App';
+import { SearchCards } from './pages/SearchCards.jsx';
+// import { SingleCardDisplay } from './components/SingleCardDisplay.jsx'
 //import SavedCollection from './pages/SavedCollection'
 //import Sets from './pages/Sets.jsx'
 

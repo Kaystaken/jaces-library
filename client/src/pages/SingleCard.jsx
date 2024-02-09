@@ -1,26 +1,40 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_CARDS } from '../../utils/queries';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
-const SingleCard = ({ cardId }) => {
-    const { cardId } = useParams();
-
-  // Query hook to fetch the card data
-  const { loading, error, data } = useQuery(QUERY_CARDS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  const card = data.cards.find(c => c.id === cardId);
-  if (!card) return <p>Card not found</p>;
-
+function SingleCardDisplay({ imageUri, name, oracleText, typeLine }) {
   return (
-    <div>
-      <h2>{card.name}</h2>
-      <img src={card.image_uris.normal} alt={card.name} />
-      <p>{card.oracle_text}</p>
-      <p>{card.type_line}</p>
-    </div>
+    <Card sx={{
+      maxWidth: 300,
+      margin: "0 auto",
+      padding: 1,
+    }}>
+      <CardMedia
+        component='img'
+        sx={{ objectFit: 'scale-down' }}
+        image={imageUri}
+        title={name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {name}
+        </Typography>
+        <Typography gutterBottom variant="body2" component="div">
+          {typeLine}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {oracleText}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Add to Collection</Button>
+      </CardActions>
+    </Card>
   );
-};
+}
 
-export default SingleCard;
+export { SingleCardDisplay };
