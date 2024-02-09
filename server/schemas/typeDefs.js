@@ -59,7 +59,7 @@ const typeDefs = `
   type Query {
     cards: [Card]
     collection(username: String): Collection
-    decks((username: String): [Decks]
+    decks(username: String): [Deck]
     set(setCode: String): [Card]
     set_list: [String]
   }
