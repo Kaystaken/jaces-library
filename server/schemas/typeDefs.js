@@ -45,8 +45,30 @@ const typeDefs = `
     set: String
   }
 
+  type Collection {
+    username: String
+    cards: [String]
+  }
+  
+  type Deck {
+    username: String
+    cards: [String]
+    name: String
+  }
+
   type Query {
     cards: [Card]
+    collection(username: String): Collection
+    decks((username: String): [Decks]
+    set(setCode: String): [Card]
+    set_list: [String]
+  }
+
+  type Mutation {
+    addCardToCollection(username: String, cardId: String): Collection
+    removeCardFromCollection(username: String, cardId: String): Collection
+    addCardToDeck(username: String, name: String, cardId: String): Deck
+    removeCardFromDeck(username: String, name: String, cardId: String): Deck
   }
 `;
 

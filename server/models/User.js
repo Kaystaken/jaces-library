@@ -4,24 +4,23 @@ const bcrypt = require('bcrypt');
 const cardSchema = require('./Card');
 
 const userSchema = new Schema(
-    {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            match: [/.+@.+\..+/, 'Must use a valid email address'],
-        },
-        password: {
-            type: String,
-            required: true,
-        },
-
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
+    password: {
+      type: String,
+      required: true,
     }
+  }
 );
 
 // hash user password
@@ -42,9 +41,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
   // when we query a user, we'll also get another field called `cardCount` with the number of saved cards we have
 userSchema.virtual('cardCount').get(function () {
-    return this.savedCards.length;
+    return this.Collection.length;
   });
   
-  const User = model('User', userSchema);
-  
-  module.exports = User;
+const User = model('User', userSchema);
+
+module.exports = User;

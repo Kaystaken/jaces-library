@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const collectionSchema = new Schema({
+const deckSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -13,8 +13,12 @@ const collectionSchema = new Schema({
       trim: true,
     },
   ],
+  name: {
+    type: String,
+    trim: true,
+  }
 });
 
-const Collection = model('Collection', collectionSchema);
+const Deck = model('Deck', deckSchema);
 
-module.exports = Collection;
+module.exports = Deck;
