@@ -1,33 +1,20 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose.Schema;
+const { Schema, model } = require('mongoose');
 
-const CollectionSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+const collectionSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  cards: [
+    {
+      type: String,
+      trim: true,
     },
-    cards: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Card' 
-    }],
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
+  ],
 });
 
-// Virtual for the URL of the collection
-CollectionSchema.virtual('url').get(function() {
-    return '/api/collections/' + this._id;
-});
+const Collection = model('Collection', collectionSchema);
 
-
-module.exports = mongoose.model('Collection', CollectionSchema);
+module.exports = Collection;

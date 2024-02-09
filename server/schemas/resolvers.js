@@ -1,18 +1,33 @@
-const { Card } = require('../models');
+const { Card, Collection, Deck, User } = require('../models');
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
     cards: async () => {
       return Card.find({});
-    }
+    },
+    collection: async (parent, { username }) => {
+      return Collection.findOne({ username });
+    },
+    decks: async (parent, { username }) => {
+      return Deck.find({ username });
+    },
+    set: async (parent, args) => {
+      return Card.find({ set: args.setCode });
+    },
+    set_list: async () => {
+      return Card.distinct('set');
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw AuthenticationError;
+    },
   },
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
-    },
     login: async (parent, { email, password }) => {
+      console.log('is this a thing')
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -26,75 +41,63 @@ const resolvers = {
       }
 
       const token = signToken(user);
+      return { token, user };
+    },
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
 
       return { token, user };
-
-    }, saveCard: async (parent, { CardToSave }, context) => {
-      console.log('CardToSave: ', CardToSave);
+    },
+    addCardToCollection: async (parent, { username, cardId }) => {
+      // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $push: { savedCard: CardToSave } },
-          { new: true, runValidators: true }
+        return await Collection.findOneAndUpdate(
+          { username },
+          {
+            $addToSet: { cards: cardId },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
         );
-        return updatedUser;
       }
+      // If user attempts to execute this mutation and isn't logged in, throw an error
       throw AuthenticationError;
     },
-    removeCard: async (parent, { cardId }, context) => {
+    removeCardFromCollection: async (parent, { username, cardId }) => {
+      return Collection.findOneAndUpdate(
+        { username },
+        { $pull: { cards: cardId } },
+        { new: true }
+      );
+    },
+    addCardToDeck: async (parent, { username, name, cardId }) => {
+      // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { savedCard: { cardId: cardId } } },
-          { new: true }
+        return await Deck.findOneAndUpdate(
+          { username, name },
+          {
+            $addToSet: { cards: cardId },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
         );
-        return updatedUser;
       }
+      // If user attempts to execute this mutation and isn't logged in, throw an error
       throw AuthenticationError;
     },
-
-    addCardToDeck: async (parent, { cardName, cardImage }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError("You must be logged in!");
-      }
-      const deck = await Deck.findOne({});
-      if (!deck) {
-        throw new Error("Deck not found");
-      }
-      const card = await Card.findById(cardId);
-      if (!card) {
-        throw new Error("Card not found");
-      }
-      const existingCard = deck.cards.find(c => c.cardId.toString() === cardId);
-      if (existingCard) {
-        existingCard.quantity += 1;
-      } else {
-        deck.cards.push({ cardId: card._id, quantity: 1 });
-      }
-
-      await deck.save();
-
-      return deck;
+    removeCardFromDeck: async (parent, { username, name, cardId }) => {
+      return Deck.findOneAndUpdate(
+        { username, name },
+        { $pull: { cards: cardId } },
+        { new: true }
+      );
     },
-
-    removeCardFromDeck: async (parent, { cardId }, context) => {
-
-      if (!context.user) {
-        throw new AuthenticationError("You must be logged in!");
-      }
-
-      const deck = await Deck.findOne({});
-      if (!deck) {
-        throw new Error("Deck not found");
-      }
-
-      deck.cards.pull({ cardId: cardId });
-
-      await deck.save();
-
-      return deck;
-    },
-  }
+  },
 };
 
 module.exports = resolvers;
