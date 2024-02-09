@@ -1,15 +1,29 @@
 import React from 'react';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
-const Card = ({ card }) => {
+
+const CustomCard = ({ card }) => {
   return (
-    <div className="card">
-      <img src={card.image} alt={card.name} />
-      <div className="card-body">
-        <h5 className="card-title">{card.name}</h5>
-        <p className="card-text">{card.description}</p>
-      </div>
-    </div>
+    <Card>
+      <CardMedia
+        component="img"
+        height="140"
+        image={card.image}
+        alt={card.name}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {card.name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {card.description}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
-export default Card;
+export default CustomCard;
