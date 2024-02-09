@@ -1,9 +1,9 @@
-import { Stack, TextField, Button } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_CARDS } from '../../utils/queries';
-// import { SingleCardDisplay } from '../components/SingleCardDisplay';
+import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
 function SearchCards() {
   const { loading, data } = useQuery(QUERY_CARDS);
@@ -14,10 +14,10 @@ function SearchCards() {
         <TextField id='card-search' label='Card name' variant='outlined' size='small' />
         <Button variant='contained' size='small'><SearchIcon />Search</Button>
       </Stack>
-      {/* {
+      {
         (!loading && data) && 
         <SingleCardDisplay {...getCardDisplayData(data.cards[10000])} />
-      } */}
+      }
     </Stack>
   );
 }
