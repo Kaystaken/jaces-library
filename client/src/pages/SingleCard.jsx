@@ -1,38 +1,44 @@
 import { Stack, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useQuery } from '@apollo/client';
-import Navbar from '../components/Navbar'
-import { QUERY_CARDS } from '../utils/queries';
+import { useLazyQuery } from '@apollo/client';
+import { useState } from 'react';
+
+import { SEARCH_CARDS } from '../utils/queries';
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 
 function SingleCard() {
-  const { loading, data } = useQuery(QUERY_CARDS);
+  const [performSearch, { loading, data }] = useLazyQuery(SEARCH_CARDS);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleChange = (changeEvent) => {
+    setSearchTerm(changeEvent.target.value);
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key === 'Enter') {
+      searchCards();
+    }
+  }
+  const searchCards = () => {
+    performSearch({ variables: { searchTerm }});
+  };
 
   return (
-    <>
-        <Stack>
-          <Navbar />
-        </Stack>
-      <Stack spacing={2}>
-        <Stack direction='row' spacing={1}>
-          <TextField id='card-search' label='Card name' variant='outlined' size='small' />
-          <Button variant='contained' size='small'><SearchIcon />Search</Button>
-        </Stack>
-       
-        {
-        (!loading && data) && 
-
-        <SingleCardDisplay {...getCardDisplayData(data.cards[10000])} />
-      }
-
+    <Stack spacing={2}>
+      <Stack direction='row' spacing={1}>
+        <TextField id='card-search' value={searchTerm} onKeyUp={handleKeyUp} onChange={handleChange} label='Card name' variant='outlined' size='small' />
+        <Button onClick={searchCards} variant='contained' size='small'>
+          <SearchIcon />Search
+        </Button>
       </Stack>
-    </>
+      {
+        (!loading && data) && 
+        data.searchCards.map(card => {
+          if (!card.image_uris) { return null; }
+          return <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />;
+        })
+      }
+    </Stack>
   );
 }
 

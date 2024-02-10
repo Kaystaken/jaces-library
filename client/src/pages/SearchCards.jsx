@@ -1,7 +1,6 @@
 import { Stack, TextField, Button, Grid, Box, Paper, Container } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import Navbar from '../components/Navbar'
 import Sidebar from '../components/SideBar'
 import { QUERY_CARDS } from '../utils/queries';
 // import { SingleCardDisplay } from '../components/SingleCardDisplay';

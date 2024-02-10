@@ -1,5 +1,19 @@
 import { gql } from '@apollo/client';
 
+export const SEARCH_CARDS = gql`
+  query searchCards($searchTerm: String!) {
+    searchCards(searchTerm: $searchTerm) {
+      id
+      name
+      oracle_text
+      type_line
+      image_uris {
+        normal
+      }
+    }
+  }
+`;
+
 export const QUERY_CARDS = gql`
   query cards {
     cards {

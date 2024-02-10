@@ -11,9 +11,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
-import PublicIcon from '@mui/icons-material/Public';
-import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
-import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
 import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
@@ -65,9 +62,13 @@ const itemCategory = {
 export default function Navigator(props) {
     const { ...other } = props;
     const [searchTerm, setSearchTerm] = React.useState('');
+
+    const drawerWidth = 240;
+
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
+
     const handleSearch = (event) => {
         event.preventDefault();
         // remember to put search logic here
@@ -75,7 +76,7 @@ export default function Navigator(props) {
     };
 
     return (
-        <Drawer variant="permanent" {...other}>
+        <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' }}} anchor='left' {...other}>
             <List disablePadding>
                 <ListItem>
                     <TextField
