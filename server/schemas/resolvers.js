@@ -1,6 +1,17 @@
 const { Card, Collection, Deck, User } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
+function shuffle(arr) {
+  var j, x, index;
+  for (index = arr.length - 1; index > 0; index--) {
+      j = Math.floor(Math.random() * (index + 1));
+      x = arr[index];
+      arr[index] = arr[j];
+      arr[j] = x;
+  }
+  return arr;
+}
+
 const resolvers = {
   Query: {
     cards: async () => {
@@ -10,7 +21,19 @@ const resolvers = {
       const searchTerms = searchTerm.trim().split(' ');
       const regexTerms = searchTerms.join('|');
 
-      return Card.find({ name: { '$regex': regexTerms, '$options': 'i' } }).limit(20);
+      return Card.find({ name: { '$regex': regexTerms, '$options': 'i' }}).limit(20);
+    },
+    randomCommanders: async () => {
+      const legendary = await Card.find({
+        type_line: { '$regex': '^Legendary Creature' },
+      }).select('id');
+      const planeswalkers = await Card.find({
+        oracle_text: { '$regex': 'can be your commander' }, 
+      }).select('id');
+
+      const cards = shuffle(legendary.concat(planeswalkers)).slice(0, 10);
+      const ids = cards.map(card => card.id);
+      return Card.find({ id: { $in: ids }});
     },
     collection: async (parent, { username }) => {
       return Collection.findOne({ username });
