@@ -58,6 +58,8 @@ const typeDefs = `
 
   type Query {
     cards: [Card]
+    searchCards(searchTerm: String!): [Card]
+    randomCommanders: [Card]
     collection(username: String): Collection
     decks(username: String): [Deck]
     set(setCode: String): [Card]
