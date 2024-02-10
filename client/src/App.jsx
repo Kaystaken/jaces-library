@@ -4,11 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-// import Navigator from './Navigator';
-// import Content from './Content';
-// import Header from './Header';
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -17,7 +13,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-//import Navbar from './components/Navbar';
+import Sidebar from './components/SideBar.jsx';
 import Auth from './utils/auth';
 
 const httpLink = createHttpLink({
@@ -203,8 +199,11 @@ function App() {
       <CssBaseline />
     <>
       <ApolloProvider client={client}>
-      <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-        <Outlet />
+        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+          <Sidebar />
+          <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
+            <Outlet />
+          </Box>
         </Box>
       </ApolloProvider>
     </>

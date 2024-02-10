@@ -6,6 +6,12 @@ const resolvers = {
     cards: async () => {
       return Card.find({});
     },
+    searchCards: async (parent, { searchTerm }) => {
+      const searchTerms = searchTerm.trim().split(' ');
+      const regexTerms = searchTerms.join('|');
+
+      return Card.find({ name: { '$regex': regexTerms, '$options': 'i' } }).limit(20);
+    },
     collection: async (parent, { username }) => {
       return Collection.findOne({ username });
     },
