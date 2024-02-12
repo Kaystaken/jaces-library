@@ -6,7 +6,6 @@ import RandomCommanderList from './pages/RandomCommander.jsx';
 import Details from './pages/Details.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 //import SavedCollection from './pages/SavedCollection'
-//import Sets from './pages/Sets.jsx'
 
 const router = createBrowserRouter([
   {
