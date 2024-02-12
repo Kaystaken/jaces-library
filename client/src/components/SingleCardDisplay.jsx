@@ -1,20 +1,33 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { useMutation, useQuery } from '@apollo/client';
 
-import { ADD_TO_COLLECTION } from '../utils/mutations';
+import { ADD_TO_COLLECTION, REMOVE_FROM_COLLECTION } from '../utils/mutations';
+import { GET_SAVED_CARDS } from '../utils/queries'; 
 
 function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
-  const [addToCollection] = useMutation(ADD_TO_COLLECTION);
+  const { loading, data } = useQuery(GET_SAVED_CARDS);
+  const [addToCollection] = useMutation(ADD_TO_COLLECTION, {
+    refetchQueries: [{ query: GET_SAVED_CARDS }],
+  });
+  const [removeFromCollection] = useMutation(REMOVE_FROM_COLLECTION, {
+    refetchQueries: [{ query: GET_SAVED_CARDS }],
+  });
+
+  let hasCard = false;
+  if (data) {
+    const cardIds = data.collection.map(card => card.id);
+    hasCard = cardIds.includes(id);
+  }
 
   const addCardToCollection = async () => {
-    const { data } = await addToCollection({
+    await addToCollection({
+      variables: { cardId: id }
+    });
+  };
+
+  const removeCardFromCollection = async () => {
+    await removeFromCollection({
       variables: { cardId: id }
     });
   };
@@ -25,14 +38,12 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
       margin: "0 auto",
       padding: 1,
     }}>
-      <Link to={`/details/${id}`}>
       <CardMedia
         component='img'
         sx={{ objectFit: 'scale-down' }}
         image={imageUri}
         title={name}
       />
-      </Link>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
@@ -45,7 +56,11 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={addCardToCollection}>Add to Collection</Button>
+        {
+          hasCard ?
+          <Button size="small" color="error" onClick={removeCardFromCollection}>Remove from Collection</Button> :
+          <Button size="small" onClick={addCardToCollection}>Add to Collection</Button>
+        }
         <Button size="small">Add to Deck</Button>
       </CardActions>
     </Card>

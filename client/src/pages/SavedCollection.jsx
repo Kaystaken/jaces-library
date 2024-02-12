@@ -6,7 +6,6 @@ import { GET_SAVED_CARDS } from '../utils/queries';
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
 const SavedCollection = () => {
-
   const { loading, error, data } = useQuery(GET_SAVED_CARDS);
 
   if (loading) return <p>Loading...</p>;

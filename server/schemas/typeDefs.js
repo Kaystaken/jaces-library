@@ -77,7 +77,7 @@ const typeDefs = `
 
   type Mutation {
     addCardToCollection(cardId: String): Collection
-    removeCardFromCollection(username: String, cardId: String): Collection
+    removeCardFromCollection(cardId: String): Collection
     addCardToDeck(username: String, name: String, cardId: String): Deck
     removeCardFromDeck(username: String, name: String, cardId: String): Deck
     addUser(username: String, email: String, password: String): Auth

@@ -33,6 +33,14 @@ export const ADD_TO_COLLECTION = gql`
   }
 `;
 
+export const REMOVE_FROM_COLLECTION = gql`
+  mutation RemoveFromCollection($cardId: String!) {
+    removeCardFromCollection(cardId: $cardId) {
+      cards
+    }
+  }
+`;
+
 export const ADD_TO_DECK = gql`
   mutation AddToDeck(, $cardName: String!, $cardImage: String!) {
     addCardToDeck(cardName: $cardName, cardImage: $cardImage) {
