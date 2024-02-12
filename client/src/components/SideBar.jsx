@@ -17,6 +17,8 @@ import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
 import { Link, useNavigate } from 'react-router-dom'
 
+import Auth from '../utils/auth';
+
 const categories = [
     {
         id: 'For You',
@@ -113,9 +115,7 @@ export default function Navigator(props) {
                             {/* You can choose an icon that represents sign in or sign up */}
                             <PeopleIcon />
                         </ListItemIcon>
-                        <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
-                            <ListItemText primary="Login / Sign Up" />
-                        </Link>
+                        { Auth.loggedIn() ? getLogOutComponent() : getLogInComponent() }
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -123,3 +123,14 @@ export default function Navigator(props) {
     );
 };
 
+function getLogInComponent() {
+    return (
+        <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ListItemText primary="Login / Sign Up" />
+        </Link>
+    );
+}
+
+function getLogOutComponent() {
+    return <ListItemText primary="Log Out" onClick={Auth.logout} />;
+}
