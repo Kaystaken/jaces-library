@@ -184,7 +184,7 @@ theme = {
   },
 };
 
-const drawerWidth =  256;
+const drawerWidth = 256;
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -193,23 +193,28 @@ function App() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
+
+  // Combine the Router with the ApolloProvider and ThemeProvider
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-    <>
-      <ApolloProvider client={client}>
-        <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-          <Sidebar />
-          <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-            <Outlet />
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+          <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+            <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+              {/* Implementing Switch for routing between different components */}
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                {/* Add other routes here */}
+              </Switch>
+            </Box>
           </Box>
-        </Box>
-      </ApolloProvider>
-    </>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 
-export default App ;
+export default App;
 
