@@ -107,6 +107,17 @@ export default function Navigator(props) {
                         <Divider sx={{ mt: 2 }} />
                     </Box>
                 ))}
+                <ListItem disablePadding>
+                    <ListItemButton sx={item}>
+                        <ListItemIcon>
+                            {/* You can choose an icon that represents sign in or sign up */}
+                            <PeopleIcon />
+                        </ListItemIcon>
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <ListItemText primary="Login / Sign Up" />
+                        </Link>
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Drawer>
     );
