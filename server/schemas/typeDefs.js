@@ -1,4 +1,13 @@
 const typeDefs = `
+  type User {
+    username: String,
+    email: String,
+    deck: Deck
+  }
+  type Auth {
+    token: ID,
+    user: User, 
+  }
   type CardImages {
     png: String
     border_crop: String
@@ -72,6 +81,8 @@ const typeDefs = `
     removeCardFromCollection(username: String, cardId: String): Collection
     addCardToDeck(username: String, name: String, cardId: String): Deck
     removeCardFromDeck(username: String, name: String, cardId: String): Deck
+    addUser(username: String, email: String, password: String): Auth
+    login(email: String, password: String): Auth
   }
 `;
 

@@ -15,7 +15,7 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
-import  { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const categories = [
     {
@@ -78,7 +78,7 @@ export default function Navigator(props) {
                         <HomeIcon />
                     </ListItemIcon>
                     <Link to={`/`}>
-                    <ListItemText>Home</ListItemText>
+                        <ListItemText>Home</ListItemText>
                     </Link>
                 </ListItem>
                 {categories.map(({ id, children }) => (
@@ -97,6 +97,17 @@ export default function Navigator(props) {
                         <Divider sx={{ mt: 2 }} />
                     </Box>
                 ))}
+                <ListItem disablePadding>
+                    <ListItemButton sx={item}>
+                        <ListItemIcon>
+                            {/* You can choose an icon that represents sign in or sign up */}
+                            <PeopleIcon />
+                        </ListItemIcon>
+                        <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <ListItemText primary="Login / Sign Up" />
+                        </Link>
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Drawer>
     );
