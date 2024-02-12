@@ -35,6 +35,11 @@ const resolvers = {
       const ids = cards.map(card => card.id);
       return Card.find({ id: { $in: ids }});
     },
+    cardDetails: async (parent, { id }) => {
+      console.log(id)
+      return Card.findOne({ id: id});
+    },
+
     collection: async (parent, { username }) => {
       return Collection.findOne({ username });
     },

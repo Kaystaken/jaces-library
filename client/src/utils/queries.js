@@ -57,3 +57,17 @@ export const DECK_QUERY = gql`
     }
   }
 `;
+
+export const GET_CARD_DETAILS = gql`
+  query GetCardDetails($cardId: String!) {
+    cardDetails(id: $cardId) {
+      id
+      name
+      image_uris {
+        normal
+      }
+      oracle_text
+      type_line
+    }
+  }
+`;
