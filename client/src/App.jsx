@@ -5,6 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -12,7 +13,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
+import  SearchBar from './components/SearchBar.jsx'
 import Sidebar from './components/SideBar.jsx';
 import Auth from './utils/auth';
 

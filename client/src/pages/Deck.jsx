@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { DECK_QUERY } from '../../utils/queries'; 
+import { DECK_QUERY } from '../utils/queries'; 
 
-const DeckPage = () => {
+const Deck = () => {
  
   const { loading, error, data } = useQuery(DECK_QUERY);
 
@@ -10,13 +10,13 @@ const DeckPage = () => {
 
   if (error) return <p>Error</p>;
 
-  const { deck } = data;
+  const { decks } = data;
 
   return (
     <div>
-      <h2>{deck.name}</h2>
+      <h2>{decks.name}</h2>
       <ul>
-        {deck.cards.map((card) => (
+        {decks.cards.map((card) => (
           <li key={card.cardId}>
             <h3>{card.name}</h3>
             <img src={card.image} alt={card.name} />
@@ -29,4 +29,4 @@ const DeckPage = () => {
   );
 };
 
-export default DeckPage;
+export { Deck };
