@@ -14,7 +14,6 @@ const Deck = () => {
 
   return (
     <div>
-      <h2>{decks.name}</h2>
       <ul>
         {decks.cards.map((card) => (
           <li key={card.cardId}>

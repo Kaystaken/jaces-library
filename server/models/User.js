@@ -19,6 +19,11 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    deck: {
+      type: Schema.Types.ObjectId,
+      trim: true,
+      ref: "Deck" 
     }
   }
 );

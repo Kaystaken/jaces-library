@@ -15,13 +15,14 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
+import  { Link } from 'react-router-dom'
 
 const categories = [
     {
         id: 'For You',
         children: [
             {
-                id: 'My Collection',
+                id: 'My Mystical Collection',
                 icon: <PeopleIcon />,
                 active: null,
             },
@@ -76,7 +77,9 @@ export default function Navigator(props) {
                     <ListItemIcon>
                         <HomeIcon />
                     </ListItemIcon>
+                    <Link to={`/`}>
                     <ListItemText>Home</ListItemText>
+                    </Link>
                 </ListItem>
                 {categories.map(({ id, children }) => (
                     <Box key={id} sx={{ bgcolor: '#101F33' }}>

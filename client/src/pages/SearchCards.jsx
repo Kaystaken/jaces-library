@@ -17,6 +17,7 @@ const ResultsPage = () => {
 
   function getCardDisplayData(card) {
     return {
+      id: card.id,
       imageUri: card.image_uris?.normal,
       name: card.name,
       oracleText: card.oracle_text,
@@ -32,7 +33,7 @@ const ResultsPage = () => {
           if (!card.image_uris) { return null; }
           return (
         <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
-          <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />;
+          <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />
         </Grid>
           );  
         })

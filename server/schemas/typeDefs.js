@@ -64,6 +64,7 @@ const typeDefs = `
     decks(username: String): [Deck]
     set(setCode: String): [Card]
     set_list: [String]
+    cardDetails(id: String!): Card
   }
 
   type Mutation {

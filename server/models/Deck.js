@@ -9,14 +9,15 @@ const deckSchema = new Schema({
   },
   cards: [
     {
-      type: String,
+      type: Schema.Types.ObjectId,
       trim: true,
+      ref: "Card"
     },
   ],
-  name: {
-    type: String,
-    trim: true,
-  }
+  // name: {
+  //   type: String,
+  //   trim: true,
+  // }
 });
 
 const Deck = model('Deck', deckSchema);
