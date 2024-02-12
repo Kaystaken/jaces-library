@@ -4,8 +4,8 @@ import  App  from './App';
 import ResultsPage from './pages/SearchCards.jsx';
 import RandomCommanderList from './pages/RandomCommander.jsx';
 import Details from './pages/Details.jsx';
+// import Deck from '../../server/models/Deck.js';
 //import SavedCollection from './pages/SavedCollection'
-//import Sets from './pages/Sets.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,11 @@ const router = createBrowserRouter([
       {
         path: '/details/:cardId',
         element: <Details/>
-      }
+      },
+      // {
+      //   path: '/myDeck',
+      //   element: <Deck/>
+      // }
     ]
   }
 ])
