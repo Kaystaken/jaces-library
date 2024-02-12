@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CARDS } from '../utils/queries';
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
-function SearchCards() {
+function SearchCards1() {
   const { loading, data } = useQuery(QUERY_CARDS);
 
   return (
@@ -31,4 +31,4 @@ function getCardDisplayData(card) {
   };
 }
 
-export { SearchCards };
+export { SearchCards1 };

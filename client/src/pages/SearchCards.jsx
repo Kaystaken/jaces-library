@@ -1,41 +1,47 @@
-import { Stack, TextField, Button, Grid, Box, Paper, Container } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import { useQuery } from '@apollo/client';
-import Sidebar from '../components/SideBar'
-import { QUERY_CARDS } from '../utils/queries';
-// import { SingleCardDisplay } from '../components/SingleCardDisplay';
+import React from 'react';
+import { Grid } from '@mui/material';
+import { useLazyQuery } from '@apollo/client';
 
-function SearchCards() {
-  const { loading, data } = useQuery(QUERY_CARDS);
+import { useParams } from 'react-router-dom';
+import { SEARCH_CARDS } from '../utils/queries';
+import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
+const ResultsPage = () => {
+  const { searchTerm } = useParams();
+  const decodedSearchTerm = decodeURIComponent(searchTerm);
+  const [performSearch, { loading, data }] = useLazyQuery(SEARCH_CARDS);
+
+  React.useEffect(() => {
+    performSearch({ variables: { searchTerm: decodedSearchTerm } });
+  }, [performSearch, decodedSearchTerm]);
+
+  function getCardDisplayData(card) {
+    return {
+      imageUri: card.image_uris?.normal,
+      name: card.name,
+      oracleText: card.oracle_text,
+      typeLine: card.type_line
+    };
+  }
   return (
-    <>
-        <Stack>
-          <Sidebar/>
-        </Stack>
-      {/* <Stack spacing={2}>
-        <Stack direction='row' spacing={2}>
-          <TextField id='card-search' label='Card name' variant='outlined' size='small' />
-          <Button variant='contained' size='small'><SearchIcon />Search</Button>
-        </Stack>
-        {/* {
-        (!loading && data) && 
-
-        <SingleCardDisplay {...getCardDisplayData(data.cards[10000])} />
-      } */}
-
-     {/* </Stack> */}
-    </>
+    <div>
+      <h1> Results for "{decodedSearchTerm}"</h1>
+      <Grid container spacing={2}>
+      {
+        !loading && data && data.searchCards.map(card => {
+          if (!card.image_uris) { return null; }
+          return (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+          <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />;
+        </Grid>
+          );  
+        })
+      }
+      </Grid>
+    </div>
   );
-    }
+};
 
-function getCardDisplayData(card) {
-  return {
-    imageUri: card.image_uris.normal,
-    name: card.name,
-    oracleText: card.oracle_text,
-    typeLine: card.type_line
-  };
-}
 
-export { SearchCards };
+
+export default ResultsPage

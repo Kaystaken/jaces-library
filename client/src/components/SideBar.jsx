@@ -14,10 +14,7 @@ import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import InputAdornment from '@mui/material/InputAdornment';
+import SearchBar from './SearchBar';
 
 const categories = [
     {
@@ -61,70 +58,19 @@ const itemCategory = {
 
 export default function Navigator(props) {
     const { ...other } = props;
-    const [searchTerm, setSearchTerm] = React.useState('');
-
     const drawerWidth = 240;
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    const handleSearch = (event) => {
-        event.preventDefault();
-        // remember to put search logic here
-        console.log(searchTerm)
-    };
 
     return (
-        <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' }}} anchor='left' {...other}>
+        <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' } }} anchor='left' {...other}>
             <List disablePadding>
                 <ListItem>
-                    <TextField
-                        id="search"
-                        type="search"
-                        label="Search for cards"
-                        placeholder="What're you looking for?"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        sx={{
-                            width: '100%',
-                            '& .MuiInputBase-input': {
-                                color: 'white',
-                            },
-                            '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'white',
-                            },
-                            '& .MuiInputBase-input::placeholder': {
-                                color: 'white',
-                            },
-                            '&:hover fieldset': {
-                                borderColor: 'white',
-                            },
-                            '&.Mui-focused fieldset': {
-                                borderColor: 'white',
-                            },
-                            '& label': {
-                                color: 'white',
-                            },
-                            '& ':{
-                                color: 'white',
-                            }
-
-                        }}
-
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton type="submit" onClick={handleSearch} sx={{ color: 'teal' }}>
-                                        <SearchIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                    <SearchBar></SearchBar>
                 </ListItem>
                 <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-                    Jace's Library
+                    <Box component="img"
+                        src='../images/Logo.png'
+                        sx={{ height: '40px', width: '100%' }} />
                 </ListItem>
                 <ListItem sx={{ ...item, ...itemCategory }}>
                     <ListItemIcon>
@@ -151,4 +97,4 @@ export default function Navigator(props) {
             </List>
         </Drawer>
     );
-}
+};

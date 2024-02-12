@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import  App  from './App';
-import { SearchCards } from './pages/SearchCards.jsx';
-import { SingleCard } from './pages/SingleCard.jsx'
+import ResultsPage from './pages/SearchCards.jsx';
+import { SearchCards1 } from './pages/SearchCards1.jsx';
 //import SavedCollection from './pages/SavedCollection'
 //import Sets from './pages/Sets.jsx'
 
@@ -14,13 +14,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SearchCards />
+        element: <SearchCards1 />
       }, //{
       //   path: '/collection',
       //   element: <SavedCollection /},>
      {
-        path: '/SingleCard',
-        element: <SingleCard/>
+        path: '/results/:searchTerm',
+        element: <ResultsPage/>
       },
     ]
   }
