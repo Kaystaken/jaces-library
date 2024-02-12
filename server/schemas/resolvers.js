@@ -85,8 +85,6 @@ const resolvers = {
     addCardToCollection: async (parent, { cardId }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
-        console.log('user: ', context.user.username);
-        console.log('card:', cardId);
         return await Collection.findOneAndUpdate(
           { username: context.user.username },
           {
@@ -102,12 +100,16 @@ const resolvers = {
       // If user attempts to execute this mutation and isn't logged in, throw an error
       throw AuthenticationError;
     },
-    removeCardFromCollection: async (parent, { username, cardId }) => {
-      return Collection.findOneAndUpdate(
-        { username },
-        { $pull: { cards: cardId } },
-        { new: true }
-      );
+    removeCardFromCollection: async (parent, { cardId }, context) => {
+      if (context.user) {
+        return Collection.findOneAndUpdate(
+          { username: context.user.username },
+          { $pull: { cards: cardId } },
+          { new: true }
+        );
+      }
+
+      throw AuthenticationError;
     },
     addCardToDeck: async (parent, { username, name, cardId }) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
