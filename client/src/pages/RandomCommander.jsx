@@ -1,0 +1,38 @@
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_RANDOM_COMMANDER } from '../utils/queries';
+import {Card, CardContent, Typography, Grid} from '@mui/material'
+import { SingleCardDisplay } from '../components/SingleCardDisplay';
+
+const RandomCommanderList = () => {
+  const { loading, error, data } = useQuery(GET_RANDOM_COMMANDER);
+  
+  function getCardDisplayData(card) {
+    return {
+      id: card.id,
+      imageUri: card.image_uris?.normal,
+      name: card.name,
+      oracleText: card.oracle_text,
+      typeLine: card.type_line
+    };
+  }
+return (
+    <div>
+      <h1>Looking for a new commander? Try one of these!</h1>
+      <Grid container spacing={2}>
+      {
+        !loading && data && data.randomCommanders.map(card => {
+          if (!card.image_uris) { return null; }
+          return (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+          <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />
+        </Grid>
+          );  
+        })
+      }
+      </Grid>
+    </div>
+  );
+};
+
+export default RandomCommanderList;

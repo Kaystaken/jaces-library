@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import  App  from './App';
 import ResultsPage from './pages/SearchCards.jsx';
-import { SearchCards1 } from './pages/SearchCards1.jsx';
+import RandomCommanderList from './pages/RandomCommander.jsx';
 import Details from './pages/Details.jsx';
 //import SavedCollection from './pages/SavedCollection'
 //import Sets from './pages/Sets.jsx'
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SearchCards1 />
+        element: <RandomCommanderList/>
       }, //{
       //   path: '/collection',
       //   element: <SavedCollection /},>

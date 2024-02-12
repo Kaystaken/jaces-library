@@ -71,3 +71,16 @@ export const GET_CARD_DETAILS = gql`
     }
   }
 `;
+
+export const GET_RANDOM_COMMANDER = gql`
+  query GetRandomCommanders{
+    randomCommanders {
+      id
+      name
+      image_uris{
+        normal
+      }
+    }
+  }
+  
+  `
