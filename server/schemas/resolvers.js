@@ -39,9 +39,9 @@ const resolvers = {
       console.log(id)
       return Card.findOne({ id: id});
     },
-
-    collection: async (parent, { username }) => {
-      return Collection.findOne({ username });
+    collection: async (parent, args, context) => {
+      const collection = await Collection.findOne({ username: context.user.username });
+      return Card.find({ id: { $in: collection.cards }});
     },
     decks: async (parent, { username }) => {
       return Deck.find({ username });
@@ -82,16 +82,19 @@ const resolvers = {
 
       return { token, user };
     },
-    addCardToCollection: async (parent, { username, cardId }) => {
+    addCardToCollection: async (parent, { cardId }, context) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
+        console.log('user: ', context.user.username);
+        console.log('card:', cardId);
         return await Collection.findOneAndUpdate(
-          { username },
+          { username: context.user.username },
           {
             $addToSet: { cards: cardId },
           },
           {
             new: true,
+            upsert: true,
             runValidators: true,
           }
         );

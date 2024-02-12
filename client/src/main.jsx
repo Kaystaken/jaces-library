@@ -5,7 +5,7 @@ import ResultsPage from './pages/SearchCards.jsx';
 import RandomCommanderList from './pages/RandomCommander.jsx';
 import Details from './pages/Details.jsx';
 import AuthPage from './pages/AuthPage.jsx';
-//import SavedCollection from './pages/SavedCollection'
+import SavedCollection from './pages/SavedCollection'
 
 const router = createBrowserRouter([
   {
@@ -16,9 +16,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <RandomCommanderList />
-      }, //{
-      //   path: '/collection',
-      //   element: <SavedCollection /},>
+      },
       {
         path: '/login',
         element: <AuthPage/>
@@ -30,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/details/:cardId',
         element: <Details />
+      },
+      {
+        path: '/collection',
+        element: <SavedCollection />
       }
     ]
   }

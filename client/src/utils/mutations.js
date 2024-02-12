@@ -25,6 +25,14 @@ mutation Mutation($username: String, $email: String, $password: String) {
 }
 `;
 
+export const ADD_TO_COLLECTION = gql`
+  mutation AddToCollection($cardId: String!) {
+    addCardToCollection(cardId: $cardId) {
+      cards
+    }
+  }
+`;
+
 export const ADD_TO_DECK = gql`
   mutation AddToDeck(, $cardName: String!, $cardImage: String!) {
     addCardToDeck(cardName: $cardName, cardImage: $cardImage) {

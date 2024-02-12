@@ -6,8 +6,19 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+
+import { ADD_TO_COLLECTION } from '../utils/mutations';
 
 function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
+  const [addToCollection] = useMutation(ADD_TO_COLLECTION);
+
+  const addCardToCollection = async () => {
+    const { data } = await addToCollection({
+      variables: { cardId: id }
+    });
+  };
+
   return (
     <Card sx={{
       maxWidth: 300,
@@ -34,9 +45,7 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add to Collection</Button>
-      </CardActions>
-      <CardActions>
+        <Button size="small" onClick={addCardToCollection}>Add to Collection</Button>
         <Button size="small">Add to Deck</Button>
       </CardActions>
     </Card>
