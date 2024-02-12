@@ -15,7 +15,7 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
-import  { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const categories = [
     {
@@ -25,8 +25,14 @@ const categories = [
                 id: 'My Mystical Collection',
                 icon: <PeopleIcon />,
                 active: null,
+                path: '/collection'
             },
-            { id: 'My Deck', icon: <DnsRoundedIcon /> },
+            {
+                id: 'My Deck',
+                icon: <DnsRoundedIcon />,
+                path: '/myDeck'
+            },
+
             { id: 'Storage', icon: <PermMediaOutlinedIcon />, }, ,
             ,
         ],
@@ -41,6 +47,7 @@ const categories = [
     },
 
 ];
+
 
 const item = {
     py: '2px',
@@ -58,6 +65,7 @@ const itemCategory = {
 };
 
 export default function Navigator(props) {
+    const navigate = useNavigate();
     const { ...other } = props;
     const drawerWidth = 240;
 
@@ -69,16 +77,18 @@ export default function Navigator(props) {
                     <SearchBar></SearchBar>
                 </ListItem>
                 <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-                    <Box component="img"
-                        src='../images/Logo.png'
-                        sx={{ height: '40px', width: '100%' }} />
+                    <Link to={`/`}>
+                        <Box component="img"
+                            src='../images/Logo.png'
+                            sx={{ height: '40px', width: '100%' }} />
+                    </Link>
                 </ListItem>
                 <ListItem sx={{ ...item, ...itemCategory }}>
                     <ListItemIcon>
                         <HomeIcon />
                     </ListItemIcon>
                     <Link to={`/`}>
-                    <ListItemText>Home</ListItemText>
+                        <ListItemText>Home</ListItemText>
                     </Link>
                 </ListItem>
                 {categories.map(({ id, children }) => (
@@ -88,7 +98,7 @@ export default function Navigator(props) {
                         </ListItem>
                         {children.map(({ id: childId, icon, active }) => (
                             <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item}>
+                                <ListItemButton selected={active} sx={item} onClick={() => navigate(item.path)}>
                                     <ListItemIcon>{icon}</ListItemIcon>
                                     <ListItemText>{childId}</ListItemText>
                                 </ListItemButton>
@@ -101,3 +111,4 @@ export default function Navigator(props) {
         </Drawer>
     );
 };
+
