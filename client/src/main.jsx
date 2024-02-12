@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import  App  from './App';
+import App from './App';
 import ResultsPage from './pages/SearchCards.jsx';
 import RandomCommanderList from './pages/RandomCommander.jsx';
 import Details from './pages/Details.jsx';
-// import Deck from '../../server/models/Deck.js';
+import AuthPage from './pages/AuthPage.jsx';
 //import SavedCollection from './pages/SavedCollection'
 
 const router = createBrowserRouter([
@@ -15,22 +15,22 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <RandomCommanderList/>
+        element: <RandomCommanderList />
       }, //{
       //   path: '/collection',
       //   element: <SavedCollection /},>
-     {
+      {
+        path: '/login',
+        element: <AuthPage/>
+      },
+      {
         path: '/results/:searchTerm',
-        element: <ResultsPage/>
+        element: <ResultsPage />
       },
       {
         path: '/details/:cardId',
-        element: <Details/>
-      },
-      // {
-      //   path: '/myDeck',
-      //   element: <Deck/>
-      // }
+        element: <Details />
+      }
     ]
   }
 ])

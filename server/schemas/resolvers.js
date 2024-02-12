@@ -60,7 +60,7 @@ const resolvers = {
     },*/
   },
   Mutation: {
-    /*login: async (parent, { email, password }) => {
+    login: async (parent, { email, password }) => {
       console.log('is this a thing')
       const user = await User.findOne({ email });
 
@@ -82,7 +82,7 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },*/
+    },
     addCardToCollection: async (parent, { username, cardId }) => {
       // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
       if (context.user) {
