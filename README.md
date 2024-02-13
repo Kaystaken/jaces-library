@@ -24,27 +24,26 @@ As a bonus, we also included a payment platform called KO-FI even though it was 
 - GitHub Repo: https://github.com/Kaystaken/jaces-library
 
 ## Screenshots
-Landing Page
+- Landing Page
+
 ![Screenshot1](https://github.com/Kaystaken/jaces-library/assets/148396597/ba720532-51f0-456e-8ef1-e9103cd53c52)
 
-![screenshot1](images/Screenshot1.png)
-Sign Up
+- Sign Up
+
 ![Screenshot2](https://github.com/Kaystaken/jaces-library/assets/148396597/78bae69f-5ce4-4957-b90a-062716bf0f72)
 
-![screenshot1](images/Screenshot2.png)
-Search
+- Search
+
 ![Screenshot3](https://github.com/Kaystaken/jaces-library/assets/148396597/8d755fca-3d81-4780-9de5-1909fce34d71)
 
-![screenshot1](images/Screenshot3.png)
-Saved Cards to Collection
+- Saved Cards to Collection
+
 ![Screenshot4](https://github.com/Kaystaken/jaces-library/assets/148396597/8510360c-be23-4351-864c-643554de9a00)
 
-![screenshot1](images/Screenshot4.png)
-Detailed Card
+- Detailed Card
 
 ![Screenshot5](https://github.com/Kaystaken/jaces-library/assets/148396597/a79bfdd5-1c39-4164-a52c-ce726ca6c36f)
 
-![screenshot1](images/Screenshot5.png)
 
 ## Built with
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
