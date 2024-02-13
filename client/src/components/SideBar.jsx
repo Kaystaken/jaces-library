@@ -15,7 +15,8 @@ import TimerIcon from '@mui/icons-material/Timer';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const categories = [
     {
@@ -69,6 +70,14 @@ export default function Navigator(props) {
     const { ...other } = props;
     const drawerWidth = 240;
 
+    const handleLogout = () => {
+        // Clear the token from local storage (or cookies if you're using them)
+        localStorage.removeItem('token');
+
+        // Redirect the user to the home page (or any other page)
+        navigate('/');
+    };
+
 
     return (
         <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' } }} anchor='left' {...other}>
@@ -116,6 +125,15 @@ export default function Navigator(props) {
                         <Link to="/login" style={{ textDecoration: 'none', color: 'inherit' }}>
                             <ListItemText primary="Login / Sign Up" />
                         </Link>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton sx={item} onClick={handleLogout}>
+                        <ListItemIcon>
+                            {/* Logout Icon */}
+                            <ExitToAppIcon /> {/* Import this icon from @mui/icons-material */}
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
                     </ListItemButton>
                 </ListItem>
             </List>
