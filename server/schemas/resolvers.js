@@ -36,7 +36,6 @@ const resolvers = {
       return Card.find({ id: { $in: ids }});
     },
     cardDetails: async (parent, { id }) => {
-      console.log(id)
       return Card.findOne({ id: id});
     },
     collection: async (parent, args, context) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_RANDOM_COMMANDER } from '../utils/queries';
-import {Card, CardContent, Typography, Grid, Box} from '@mui/material'
+import { Unstable_Grid2 as Grid, Box} from '@mui/material'
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
 import { Container } from '@mui/system';
 

@@ -71,7 +71,6 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
 
 function transformOracleText(oracleText) {
   const regex = /({\w+})/;
-  console.log('oracle text:', oracleText);
   const tokens = oracleText.split(regex);
 
   return tokens.map(token => {
