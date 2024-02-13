@@ -1,43 +1,73 @@
 # Jace's Library
 
-This elegant web application streamlines the art of deck management, enabling seamless creation, customization, and curation of decks for strategic game preparation.
-
 ## Description
 
-Welcome to our Magic: The Gathering deck management platform, where elegance meets functionality. This web application is meticulously crafted for enthusiasts seeking a refined approach to deck building and strategy. It offers an intuitive interface for the seamless creation, customization, and curation of decks, ensuring your preparation for the game is as strategic and efficient as possible. Dive into a world where managing your decks is not just a task, but an art form, empowering you to elevate your game to new heights.
+Jace's Library was the exclamation point at the end of our 16 week long coding bootcamp. We were challenged to design a single-page application that featured at least 4 models using MongoDB and the Mongoose ODM for the database; used React for the front end; and GraphQL with a Node.js and Express.js server.
+
+Additionally, we were tasked with using queries and mutations for retrieving, adding, updating and deleting data all while being mindful to include JWT authentication.
+
+As a bonus, we also included a payment platform called KO-FI even though it was optional, but we wanted to put what we learned into practice!
 
 ## Features
+- Responsive UI made with Material UI
+- Ability to add and save cards to a collection that is tied to the user's account
+- A login/sign up function that allows users to create the aforementioned account
+- Usage of the scryfall data to render cards, provide descriptions, mana costs and other data.
 
-Within this application, users gain access to a suite of features designed to enhance their Magic: The Gathering experience. From advanced filtering options that allow for precise deck searches to interactive tools for editing and updating decks in real-time, every aspect of the platform encourages deep engagement. Users can also benefit from a community-driven database, receiving suggestions and insights for deck optimization. Additionally, secure authentication ensures that each user's deck library remains private and protected, making this the ultimate tool for both novice players and seasoned strategists alike.
+## Installation & Usage
+- Clone the repository on github locally.
+- Install node modules through the command 'npm install' in git bash
+- Use 'npm run build' and 'npm run seed' to build & seed data
+- Use command 'npm run develop' to run the application locally
 
-## Installation
+- Deployed Application: https://jaces-library.onrender.com/ 
+- GitHub Repo: https://github.com/Kaystaken/jaces-library
 
-N/A
-
-## Usage 
-
-To utilize this platform, start by creating an account for secure access. Once logged in, navigate through the user-friendly interface to begin crafting your decks. The application supports adding, editing, and deleting cards with ease, ensuring your deck evolves alongside your strategy. For inspiration or optimization, explore community decks and integrate recommended cards into your own. Regular updates and tips are provided to enhance your deck-building skills, making each session both a learning and refining opportunity.
+## Screenshots
+Landing Page
+![screenshot1](images/Screenshot1.png)
+Sign Up
+![screenshot1](images/Screenshot2.png)
+Search
+![screenshot1](images/Screenshot3.png)
+Saved Cards to Collection
+![screenshot1](images/Screenshot4.png)
+Detailed Card
+![screenshot1](images/Screenshot5.png)
 
 ## Built with
-
-ALL THE TECHNOLOGIES WE USED! 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+ - Scryfall API: https://scryfall.com/docs/api
+ - Material UI: https://mui.com/material-ui/getting-started/
 
 ## Credits
 
-Samy Belkacem, Kay Landry, Philip Nguyen
+Kay Landry: https://github.com/Kaystaken
+
+Philip Nguyen: https://github.com/pnguyen412
+
+Samy Belkacem : https://github.com/itssSam
 
 ## Licence
+MIT License
 
-Please refer to the licence in the repository
+Copyright (c) 2023, Kay Landry, Philip Nguyen, Samy Belkacem
 
-## Authors
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Names with git links!
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Link to the deployed application (Render)
-
-## link to the repository
-
-Github Repository: 
-
-## Demo
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
