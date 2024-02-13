@@ -198,7 +198,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    <>
+      <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
       <ApolloProvider client={client}>
         <Box sx={{ display: 'flex', minHeight: '100vh' }}>
           <Sidebar />
@@ -207,7 +207,6 @@ function App() {
           </Box>
         </Box>
       </ApolloProvider>
-    </>
     </ThemeProvider>
   );
 }
