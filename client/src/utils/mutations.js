@@ -5,7 +5,6 @@ export const LOGIN_USER = gql`
     login(email: $email, password: $password) {
       token
       user {
-        _id
         username
       }
     }
@@ -24,6 +23,22 @@ mutation Mutation($username: String, $email: String, $password: String) {
     }
   }
 }
+`;
+
+export const ADD_TO_COLLECTION = gql`
+  mutation AddToCollection($cardId: String!) {
+    addCardToCollection(cardId: $cardId) {
+      cards
+    }
+  }
+`;
+
+export const REMOVE_FROM_COLLECTION = gql`
+  mutation RemoveFromCollection($cardId: String!) {
+    removeCardFromCollection(cardId: $cardId) {
+      cards
+    }
+  }
 `;
 
 export const ADD_TO_DECK = gql`

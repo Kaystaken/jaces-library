@@ -25,23 +25,20 @@ export const QUERY_CARDS = gql`
         normal
       }
     }
-  }
-`;
+  }`;
 
 export const GET_SAVED_CARDS = gql`
   query collection {
-    cards {
+    collection {
       id
       name
       oracle_text
       type_line
       image_uris {
         normal
-      
+      }
     }
-  }
-}
-`;
+  }`;
 
 export const DECK_QUERY = gql`
   query deck {

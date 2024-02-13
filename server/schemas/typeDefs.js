@@ -55,7 +55,6 @@ const typeDefs = `
   }
 
   type Collection {
-    username: String
     cards: [String]
   }
   
@@ -69,7 +68,7 @@ const typeDefs = `
     cards: [Card]
     searchCards(searchTerm: String!): [Card]
     randomCommanders: [Card]
-    collection(username: String): Collection
+    collection: [Card]
     decks(username: String): [Deck]
     set(setCode: String): [Card]
     set_list: [String]
@@ -77,8 +76,8 @@ const typeDefs = `
   }
 
   type Mutation {
-    addCardToCollection(username: String, cardId: String): Collection
-    removeCardFromCollection(username: String, cardId: String): Collection
+    addCardToCollection(cardId: String): Collection
+    removeCardFromCollection(cardId: String): Collection
     addCardToDeck(username: String, name: String, cardId: String): Deck
     removeCardFromDeck(username: String, name: String, cardId: String): Deck
     addUser(username: String, email: String, password: String): Auth
