@@ -1,19 +1,10 @@
 import * as React from 'react';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Box from '@mui/material/Box';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import {
+    Box, Divider, Drawer, Link as MuiLink, List, ListItem, ListItemButton, ListItemIcon, ListItemText
+} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
-import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
-import TimerIcon from '@mui/icons-material/Timer';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 import SearchBar from './SearchBar';
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -79,22 +70,25 @@ export default function Navigator(props) {
                         <ListItemText>Home</ListItemText>
                     </ListItemButton>
                 </ListItem>
-                {categories.map(({ id, children }) => (
-                    <Box key={id} sx={{ bgcolor: '#101F33' }}>
-                        <ListItem sx={{ py: 2, px: 3 }}>
-                            <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
-                        </ListItem>
-                        {children.map(({ id: childId, icon, active, path }) => (
-                            <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item} onClick={() => navigate(path)}>
-                                    <ListItemIcon>{icon}</ListItemIcon>
-                                    <ListItemText>{childId}</ListItemText>
-                                </ListItemButton>
+                {
+                    Auth.loggedIn() &&
+                    categories.map(({ id, children }) => (
+                        <Box key={id} sx={{ bgcolor: '#101F33' }}>
+                            <ListItem sx={{ py: 2, px: 3 }}>
+                                <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
                             </ListItem>
-                        ))}
-                        <Divider sx={{ mt: 2 }} />
-                    </Box>
-                ))}
+                            {children.map(({ id: childId, icon, active, path }) => (
+                                <ListItem disablePadding key={childId}>
+                                    <ListItemButton selected={active} sx={item} onClick={() => navigate(path)}>
+                                        <ListItemIcon>{icon}</ListItemIcon>
+                                        <ListItemText>{childId}</ListItemText>
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                            <Divider sx={{ mt: 2 }} />
+                        </Box>
+                    ))
+                }
                 <ListItem disablePadding>
                     <ListItemButton sx={item}>
                         <ListItemIcon>
@@ -105,6 +99,9 @@ export default function Navigator(props) {
                     </ListItemButton>
                 </ListItem>
             </List>
+            <MuiLink sx={{ padding: 3 }} target="_blank" href="https://ko-fi.com/L4L3UAIYY" rel="noreferrer">
+                <img height='36' style={{ border: 0, height: '36px'}} src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' />
+            </MuiLink>
         </Drawer>
     );
 };
