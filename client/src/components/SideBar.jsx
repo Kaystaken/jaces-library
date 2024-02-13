@@ -59,7 +59,7 @@ export default function Navigator(props) {
                     <Link to={`/`}>
                         <Box
                             component="img"
-                            src='../images/Logo.png'
+                            src='/Logo.png'
                             sx={{ height: '40px', width: '100%' }}
                         />
                     </Link>
