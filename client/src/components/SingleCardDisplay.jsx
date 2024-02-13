@@ -6,7 +6,7 @@ import { ADD_TO_COLLECTION, REMOVE_FROM_COLLECTION } from '../utils/mutations';
 import { GET_SAVED_CARDS } from '../utils/queries'; 
 
 function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
-  const { loading, data } = useQuery(GET_SAVED_CARDS);
+  const { data } = useQuery(GET_SAVED_CARDS);
   const [addToCollection] = useMutation(ADD_TO_COLLECTION, {
     refetchQueries: [{ query: GET_SAVED_CARDS }],
   });
@@ -51,9 +51,11 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
         <Typography gutterBottom variant="body2" component="div">
           {typeLine}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {oracleText}
-        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          dangerouslySetInnerHTML={{ __html: transformOracleText(oracleText) }}
+        />
       </CardContent>
       <CardActions>
         {
@@ -65,6 +67,21 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
       </CardActions>
     </Card>
   );
+}
+
+function transformOracleText(oracleText) {
+  const regex = /({\w+})/;
+  console.log('oracle text:', oracleText);
+  const tokens = oracleText.split(regex);
+
+  return tokens.map(token => {
+    const captureRegex = /[^{\}]+(?=})/;
+    const symbol = token.match(captureRegex);
+    if (!symbol) { return token; }
+    let symbolUsed = symbol[0].toLowerCase();
+    symbolUsed = symbolUsed === 't' ? 'tap' : symbolUsed;
+    return `<i class='ms ms-cost ms-${symbolUsed}'></i>`;
+  }).join('');
 }
 
 export { SingleCardDisplay };

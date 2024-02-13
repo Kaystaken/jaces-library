@@ -74,6 +74,7 @@ export const GET_RANDOM_COMMANDER = gql`
     randomCommanders {
       id
       name
+      oracle_text
       image_uris{
         normal
       }

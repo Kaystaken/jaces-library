@@ -33,7 +33,7 @@ const ResultsPage = () => {
         !loading && data && data.searchCards.map(card => {
           if (!card.image_uris) { return null; }
           return (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+            <Grid xs={12} sm={6} md={4} lg={3} key={card.id}>
               <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />
             </Grid>
           );  
