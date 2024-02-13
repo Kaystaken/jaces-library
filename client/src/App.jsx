@@ -197,25 +197,8 @@ function App() {
 
   // Combine the Router with the ApolloProvider and ThemeProvider
   return (
-<<<<<<< HEAD
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-          <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-            <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-              {/* Implementing Switch for routing between different components */}
-              <Switch>
-                <Route path="/" exact component={HomePage} />
-                {/* Add other routes here */}
-              </Switch>
-            </Box>
-          </Box>
-        </Router>
-      </ThemeProvider>
-    </ApolloProvider>
-=======
+
+
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
@@ -228,7 +211,7 @@ function App() {
         </Box>
       </ApolloProvider>
     </ThemeProvider>
->>>>>>> 4b807f1c203686d4463588f32be79a9764c9d2fe
+
   );
 }
 

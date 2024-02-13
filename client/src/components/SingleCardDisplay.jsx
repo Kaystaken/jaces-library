@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import { useMutation, useQuery } from '@apollo/client';
-
+import { Link } from 'react-router-dom'
 import { ADD_TO_COLLECTION, REMOVE_FROM_COLLECTION } from '../utils/mutations';
 import { GET_SAVED_CARDS } from '../utils/queries'; 
 
@@ -38,12 +38,14 @@ function SingleCardDisplay({ id,imageUri, name, oracleText, typeLine }) {
       margin: "0 auto",
       padding: 1,
     }}>
+      <Link to={`/details/${id}`}>
       <CardMedia
         component='img'
         sx={{ objectFit: 'scale-down' }}
         image={imageUri}
         title={name}
       />
+      </Link>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}

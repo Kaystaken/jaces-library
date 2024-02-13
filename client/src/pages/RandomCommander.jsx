@@ -34,7 +34,7 @@ return (
         !loading && data && data.randomCommanders.map(card => {
           if (!card.image_uris) { return null; }
           return (
-            <Grid xs={12} sm={6} md={4} lg={3} key={card.id}>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
               <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />
             </Grid>
           );  
