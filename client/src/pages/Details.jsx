@@ -6,7 +6,6 @@ import { Container, Grid, Typography } from '@mui/material';
 
 const Details = () => {
   const { cardId } = useParams();
-    console.log(cardId)
   const { loading, error, data } = useQuery(GET_CARD_DETAILS, {
     variables: { cardId },
   });
