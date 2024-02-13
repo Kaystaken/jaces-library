@@ -6,10 +6,11 @@ import { GET_SAVED_CARDS } from '../utils/queries';
 import { SingleCardDisplay } from '../components/SingleCardDisplay';
 
 const SavedCollection = () => {
-  const { loading, error, data } = useQuery(GET_SAVED_CARDS);
+  const { loading, data } = useQuery(GET_SAVED_CARDS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
+  if (loading) {
+    return null;
+  }
 
   function getCardDisplayData(card) {
     return {
@@ -26,7 +27,7 @@ const SavedCollection = () => {
       <Typography variant='h2'>Saved Collection</Typography>
       <Grid container spacing={2}>
         {(data.collection ?? []).map(card => 
-          <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+          <Grid xs={12} sm={6} md={4} lg={3} key={card.id}>
             <SingleCardDisplay key={card.id} {...getCardDisplayData(card)} />
           </Grid>
         )}

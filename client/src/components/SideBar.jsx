@@ -26,7 +26,6 @@ const categories = [
             {
                 id: 'My Mystical Collection',
                 icon: <PeopleIcon />,
-                active: null,
                 path: '/collection'
             },
             {
@@ -34,20 +33,8 @@ const categories = [
                 icon: <DnsRoundedIcon />,
                 path: '/myDeck'
             },
-
-            { id: 'Storage', icon: <PermMediaOutlinedIcon />, }, ,
-            ,
         ],
     },
-    {
-        id: 'Quality',
-        children: [
-            { id: 'Analytics', icon: <SettingsIcon /> },
-            { id: 'Performance', icon: <TimerIcon /> },
-            { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
-        ],
-    },
-
 ];
 
 
@@ -71,36 +58,35 @@ export default function Navigator(props) {
     const { ...other } = props;
     const drawerWidth = 240;
 
-
     return (
         <Drawer variant="permanent" sx={{ width: drawerWidth, flexShrink: 0, '& .MuiDrawer-paper': { width: drawerWidth, boxSizing: 'border-box' } }} anchor='left' {...other}>
             <List disablePadding>
                 <ListItem>
-                    <SearchBar></SearchBar>
+                    <SearchBar />
                 </ListItem>
                 <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
                     <Link to={`/`}>
-                        <Box component="img"
+                        <Box
+                            component="img"
                             src='../images/Logo.png'
-                            sx={{ height: '40px', width: '100%' }} />
+                            sx={{ height: '40px', width: '100%' }}
+                        />
                     </Link>
                 </ListItem>
-                <ListItem sx={{ ...item, ...itemCategory }}>
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <Link to={`/`}>
+                <ListItem disablePadding>
+                    <ListItemButton selected={false} sx={item} onClick={() => navigate('/')}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
                         <ListItemText>Home</ListItemText>
-                    </Link>
+                    </ListItemButton>
                 </ListItem>
                 {categories.map(({ id, children }) => (
                     <Box key={id} sx={{ bgcolor: '#101F33' }}>
                         <ListItem sx={{ py: 2, px: 3 }}>
                             <ListItemText sx={{ color: '#fff' }}>{id}</ListItemText>
                         </ListItem>
-                        {children.map(({ id: childId, icon, active }) => (
+                        {children.map(({ id: childId, icon, active, path }) => (
                             <ListItem disablePadding key={childId}>
-                                <ListItemButton selected={active} sx={item} onClick={() => navigate(item.path)}>
+                                <ListItemButton selected={active} sx={item} onClick={() => navigate(path)}>
                                     <ListItemIcon>{icon}</ListItemIcon>
                                     <ListItemText>{childId}</ListItemText>
                                 </ListItemButton>
